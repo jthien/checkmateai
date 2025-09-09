@@ -61,7 +61,8 @@ def check_sql_rule_agent(sql_file):
         content = f.read()
         
     response = requests.post(
-        f"https://us-central1-aiplatform.googleapis.com/v1/projects/vodaf-hack25dus-903/locations/us-central1/reasoningEngines/7261706953460547584:query",
+        #f"https://us-central1-aiplatform.googleapis.com/v1/projects/vodaf-hack25dus-903/locations/us-central1/reasoningEngines/7261706953460547584:query",
+        f"https://us-central1-aiplatform.googleapis.com/v1/projects/253918602532/locations/us-central1/reasoningEngines/6463162444532416512:query",
         headers={
             "Content-Type": "application/json; charset=utf-8",
             "Authorization": f"Bearer {get_identity_token()}",

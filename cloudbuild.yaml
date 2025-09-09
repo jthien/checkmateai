@@ -19,4 +19,4 @@ steps:
     args: ['-m', 'pip', 'install', '-r', 'requirements.txt', '--user']
   - name: python
     entrypoint: python
-    args: ['call_agent.py','--pull_request',${_PR_NUMBER}]
+    args: ['call_agent.py','--pull_request','${_PR_NUMBER}']
