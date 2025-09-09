@@ -1,0 +1,45 @@
+# Required pip3 modules for gcp-cluster:
+PyYAML
+
+
+#
+# Requirements for tools for data engineering only
+#
+requests
+
+# Required pip3 modules for ncu:
+PyGithub
+
+# other
+google-adk                            
+google-api-core                       
+google-api-python-client              
+google-auth                           
+google-auth-httplib2                  
+google-auth-oauthlib                  
+google-cloud-aiplatform               
+google-cloud-appengine-logging        
+google-cloud-artifact-registry        
+google-cloud-audit-log                
+google-cloud-bigquery                 
+google-cloud-bigquery-connection      
+google-cloud-bigquery-storage         
+google-cloud-bigtable                 
+google-cloud-core                     
+google-cloud-dataproc                 
+google-cloud-datastore                
+google-cloud-functions                
+google-cloud-language                 
+google-cloud-logging                  
+google-cloud-monitoring               
+google-cloud-resource-manager         
+google-cloud-secret-manager           
+google-cloud-spanner                  
+google-cloud-speech                   
+google-cloud-storage                  
+google-cloud-trace                    
+google-crc32c                         
+google-genai                          
+google-resumable-media                
+googleapis-common-protos              
+ 

@@ -4,9 +4,19 @@ options:
   workerPool: projects/vodaf-hack25dus-903/locations/us-central1/workerPools/pool1
 
 steps:
-# List GCS bucket.
-- name: 'gcr.io/cloud-builders/gsutil'
-  args:
-  - 'ls'
-  - '-l'
-  - 'gs://staging-hack-903'
+  # List GCS bucket.
+  # - name: 'gcr.io/cloud-builders/gsutil'
+  #   args:
+  #   - 'ls'
+  #   - '-l'
+  #   - 'gs://staging-hack-903'
+
+  - name: 'python'
+    entrypoint: 'python'
+    args: ['-m', 'pip', 'install', '--upgrade', 'pip']
+  - name: python
+    entrypoint: python
+    args: ['-m', 'pip', 'install', '-r', 'requirements.txt', '--user']
+  - name: python
+    entrypoint: python
+    args: ['call_agent.py','--pull_request','${_PR_NUMBER}']
