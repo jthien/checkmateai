@@ -21,5 +21,6 @@ response = requests.post(
             "input": "What is the exchange rate from US dollars to Swedish Krona today?"
         }
     })
+    print (data)
 )
 
