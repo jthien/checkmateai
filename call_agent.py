@@ -26,9 +26,17 @@ def get_github_pat_secret(secret_id, project_id):
 
 # Example usage:
 repo_name = "jthien/checkmateai"  # e.g. "joerg-thienenkamp/utilities"
-pr_number = 2                        # Pull request number
 comment_text = "Reviewed requirements.txt: dependencies for gcp-cluster, data engineering, ncu, and others are well organized."
 github_token = get_github_pat_secret("github_pat", "vodaf-hack25dus-903")
+
+parser = argparse.ArgumentParser(description='To parse command line arguments passed by the user.')
+parser.add_argument('-p', "--pull_request",type=int,help="Enter PR Number", default=None, required=True)
+args = parser.parse_args()
+
+#pr_number = 2                        # Pull request number
+pr_number=args.pull_request
+print(f"Get PR {pr_number}")
+
 
 def get_identity_token():
     credentials, _ = google_auth.default()
