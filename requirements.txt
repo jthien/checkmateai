@@ -8,12 +8,7 @@ PyYAML
 requests
 
 # Required pip3 modules for ncu:
-lxml
-numpy
-pandas
-openpyxl
-Faker
-pypi-json
+PyGithub
 
 # other
 google-adk                            
