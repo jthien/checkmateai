@@ -16,7 +16,7 @@ steps:
     args: ['-m', 'pip', 'install', '--upgrade', 'pip']
   - name: python
     entrypoint: python
-    args: ['-m', 'pip', 'install', '-r, 'requirements.txt', '--user']
+    args: ['-m', 'pip', 'install', '-r', 'requirements.txt', '--user']
   - name: python
     entrypoint: python
     args: ['call_agent.py']
