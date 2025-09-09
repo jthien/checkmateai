@@ -1,0 +1,12 @@
+timeout: 1200s
+logsBucket: 'vodaf-hack25dus-903-logging'
+options:
+  workerPool: projects/vodaf-hack25dus-903/locations/us-central1/workerPools/pool1
+
+steps:
+# List GCS bucket.
+- name: 'gcr.io/cloud-builders/gsutil'
+  args:
+  - 'ls'
+  - '-l'
+  - 'gs://staging-hack-903'
