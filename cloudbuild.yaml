@@ -16,7 +16,7 @@ steps:
     args: ['-m', 'pip', 'install', '--upgrade', 'pip']
   - name: python
     entrypoint: python
-    args: ['-m', 'pip', 'install', 'build', 'pytest', 'Flask', '--user']
+    args: ['-m', 'pip', 'install', 'google-api-python-client', 'google-cloud', '--user']
   - name: python
     entrypoint: python
     args: ['call_agent.py']
