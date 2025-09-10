@@ -45,16 +45,27 @@ def get_identity_token():
     credentials.refresh(auth_request)
     return credentials.token
 
-def comment_on_pr(repo_name, pr_number, comment_text, github_token, filename):
+def comment_on_pr(pr_number, comment_text, filename):
     # Authenticate to GitHub
     auth = Auth.Token(github_token)
     g = Github(auth=auth)    
-    print(repo_name)
     repo = g.get_repo(repo_name)
-    print(pr_number)
     pr = repo.get_pull(pr_number)
-    print("Add Comment")
-    pr.create_issue_comment(f"Style check on file {filename}: {comment_text}")
+
+    pr.create_issue_comment(f"CheckMateAI Style check result for file {filename}: {comment_text}")
+
+def get_pr_files(pr_number):
+    # Authenticate to GitHub
+    auth = Auth.Token(github_token)
+    g = Github(auth=auth)    
+    repo = g.get_repo(repo_name)
+    pr = repo.get_pull(pr_number)
+    
+    result_list = []    
+    for file in pr.get_files():
+        result_list.append(file.filename)
+            
+    return result_list
 
     
 def check_sql_rule_agent(sql_file):
@@ -62,8 +73,10 @@ def check_sql_rule_agent(sql_file):
         content = f.read()
         
     response = requests.post(
+        # Nicolai
         f"https://us-central1-aiplatform.googleapis.com/v1/projects/vodaf-hack25dus-903/locations/us-central1/reasoningEngines/7261706953460547584:query",
-        #f"https://us-central1-aiplatform.googleapis.com/v1/projects/253918602532/locations/us-central1/reasoningEngines/6463162444532416512:query",
+        # Dhirain - not working
+        #f"https://us-central1-aiplatform.googleapis.com/v1/projects/vodaf-hack25dus-903/locations/us-central1/reasoningEngines/6463162444532416512:query",
         headers={
             "Content-Type": "application/json; charset=utf-8",
             "Authorization": f"Bearer {get_identity_token()}",
@@ -71,14 +84,16 @@ def check_sql_rule_agent(sql_file):
         data=json.dumps({
             "class_method": "query",
             "input": {
-                "input": f"SQL Stype check for: {content}"
+                "input": f"Your are a database expert and have review the formatting of SQLs. Suggest enhancements for SQL: {content}"
             }
         })
+    
     )
     
     return response
 
 
+# To check all sql file in sql folder
 def process_sql_files(root_folder):
     for foldername, subfolders, filenames in os.walk(root_folder):
         for filename in filenames:
@@ -91,8 +106,22 @@ def process_sql_files(root_folder):
 
                 # Print output.output
                 print(data["output"]["output"])
-                comment_on_pr(repo_name, pr_number, data["output"]["output"], github_token, filename)
+                comment_on_pr(pr_number, data["output"]["output"], filename)
                 
+def process_pr_files(root_folder):
+    for filename in get_pr_files(pr_number):
+        if filename.endswith('.sql'):
+            print (f"Style check for {filename}")
+            #file_path = os.path.join(foldername, filename)
 
-process_sql_files('sql')
+            response = check_sql_rule_agent(filename)
+            print(response.text)
+            data = json.loads(response.text)
+
+            # Print output.output
+            #print(data["output"]["output"])
+            comment_on_pr(pr_number, data["output"]["output"], filename)
+
+#process_sql_files('sql')
+process_pr_files('sql')
 
