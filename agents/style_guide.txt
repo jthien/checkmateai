@@ -1,0 +1,13 @@
+SQL Style Guide
+
+
+
+1 General file rules
+1.1 File Format
+* All SQL files should be saved with a .sql extension.
+* Use UTF-8 encoding for all files.
+* Leave one blank line at the end of the file.
+1.2 Indentation
+* Use spaces for indentation; do not use tabs.
+* The tab size is set to four spaces.
+so on......
